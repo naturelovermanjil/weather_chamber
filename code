@@ -1,0 +1,57 @@
+
+#include <blynk.h> // Include the Blynk library for Particle Photon
+
+// Replace with your Blynk Auth Token
+const char* authToken = "Your_Blynk_Auth_Token";
+
+// Function to simulate sensor readings
+float getTemperature() {
+    // Simulate temperature between -20°C and 50°C
+    return -20.0 + static_cast<float>(rand()) / (RAND_MAX / 70.0);
+}
+
+float getHumidity() {
+    // Simulate humidity between 0% and 100%
+    return static_cast<float>(rand()) / (RAND_MAX / 100.0);
+}
+
+float getPressure() {
+    // Simulate pressure between 950 hPa and 1050 hPa
+    return 950.0 + static_cast<float>(rand()) / (RAND_MAX / 100.0);
+}
+
+void setup() {
+    // Initialize serial communication
+    Serial.begin(9600);
+
+    // Initialize Blynk
+    Blynk.begin(authToken);
+    Serial.println("Connected to Blynk");
+}
+
+void loop() {
+    // Run Blynk
+    Blynk.run();
+
+    // Simulate sensor readings
+    float temperature = getTemperature();
+    float humidity = getHumidity();
+    float pressure = getPressure();
+
+    // Send data to Blynk app
+    Blynk.virtualWrite(V1, temperature); // V1 for Temperature
+    Blynk.virtualWrite(V2, humidity);    // V2 for Humidity
+    Blynk.virtualWrite(V3, pressure);    // V3 for Pressure
+
+    // Print sensor data to the serial monitor
+    Serial.print("Temperature: ");
+    Serial.print(temperature);
+    Serial.print(" °C, Humidity: ");
+    Serial.print(humidity);
+    Serial.print(" %, Pressure: ");
+    Serial.print(pressure);
+    Serial.println(" hPa");
+
+    // Wait for 5 seconds before sending the next update
+    delay(5000);
+}
