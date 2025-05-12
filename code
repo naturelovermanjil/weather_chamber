@@ -45,7 +45,7 @@ void loop() {
 
     // Print sensor data to the serial monitor
     Serial.print("Temperature: ");
-    Serial.print(temperature);
+    Serial.print(temp);
     Serial.print(" °C, Humidity: ");
     Serial.print(humidity);
     Serial.print(" %, Pressure: ");
