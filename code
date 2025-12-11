@@ -22,7 +22,7 @@ float getPressure() {
 
 void setup() {
     // Initialize serial communication
-    Serial.begin(9600);
+    Serial.begin(9900);
 
     // Initialize Blynk
     Blynk.begin(authToken);
